@@ -1145,7 +1145,7 @@ export function BrandContent({ activeTags = [], onTagClick, initialExpandedProje
       agency: 'Agency: Leo Burnett Sydney',
       production: '',
       tags: ['Brand', 'Identity', 'Sustainability'],
-      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oLbmjUPUMWJrGWMO.jpg',
+      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg',
       media: [
         { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oLbmjUPUMWJrGWMO.jpg', maxWidth: '640px' },
         { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg', maxWidth: '500px' },
@@ -1879,7 +1879,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
     {
       label: 'BRAND AND IDENTITY',
       projects: [
-        { id: 'wwf-just-brand', title: 'WWF [JUST*]', thumb: '' },
+        { id: 'wwf-just-brand', title: 'WWF [JUST*]', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg' },
         { id: 'studio-mano', title: 'STUDIO MANO', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-1_13a71f69.jpg' },
         { id: 'facebook-rebrand', title: 'FACEBOOK [RE-BRANDING]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-thumb_d2c892e3.avif' },
         { id: 'bundaberg-rum', title: 'BUNDABERG RUM [BLENDING KIT]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-label_37e928ed.jpg' },
