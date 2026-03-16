@@ -1877,9 +1877,9 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
     {
       label: 'EVENTS AND ACTIVATIONS',
       projects: [
-        { id: 'mr-lee', title: 'PLAYSTATION [MR. LEE TAILOR SHOP]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/playstation-mr-lee-tailor-shop(1)_d915f8ea.gif' },
-        { id: 'meta-connect-2024', title: 'META [CONNECT 2024]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-zuck-orion_a980dc7c.jpg' },
         { id: 'meta-connect-2025', title: 'META [CONNECT 2025]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-stage_4e7dd518.webp' },
+        { id: 'meta-connect-2024', title: 'META [CONNECT 2024]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-zuck-orion_a980dc7c.jpg' },
+        { id: 'mr-lee', title: 'PLAYSTATION [MR. LEE TAILOR SHOP]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/playstation-mr-lee-tailor-shop(1)_d915f8ea.gif' },
       ]
     },
     {
