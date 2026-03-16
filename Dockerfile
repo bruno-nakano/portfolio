@@ -7,10 +7,10 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 
 # Copy manifests first for better layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
+COPY package.json pnpm-lock.yaml ./
 COPY patches/ ./patches/
 
-# Install all dependencies (including devDeps needed for build)
+# Install ALL dependencies (devDeps needed for build)
 RUN pnpm install --frozen-lockfile
 
 # Copy source
@@ -24,15 +24,15 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-# Install pnpm for production install
+# Install pnpm
 RUN corepack enable && corepack prepare pnpm@10.4.1 --activate
 
 # Copy manifests
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml* ./
+COPY package.json pnpm-lock.yaml ./
 COPY patches/ ./patches/
 
-# Install production dependencies only
-RUN pnpm install --frozen-lockfile --prod
+# Install ALL dependencies (vite plugins are referenced in the server bundle via dynamic imports)
+RUN pnpm install --frozen-lockfile
 
 # Copy built output from builder stage
 COPY --from=builder /app/dist ./dist
