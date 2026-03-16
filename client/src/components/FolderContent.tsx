@@ -1145,8 +1145,19 @@ export function BrandContent({ activeTags = [], onTagClick, initialExpandedProje
       agency: 'Agency: Leo Burnett Sydney',
       production: '',
       tags: ['Brand', 'Identity', 'Sustainability'],
-      hoverImg: '',
-      media: [] as { type: string; url: string }[]
+      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oLbmjUPUMWJrGWMO.jpg',
+      media: [
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oLbmjUPUMWJrGWMO.jpg', maxWidth: '640px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/yQgxQEFMfbaJXknc.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ucPOkqJsCaxnZUMU.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/rmaoShGYBzogksqG.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ogNzsSdcHxamGKja.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mMsoyexyObTDkdTl.jpg', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/YvnarBzOvYueLGuU.gif', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/QKNljSyKJUUDdcNW.gif', maxWidth: '500px' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/tAvomcXyyvCSjbYG.gif', maxWidth: '500px' },
+      ] as { type: string; url: string; [key: string]: any }[]
     },
     {
       id: 'studio-mano',
