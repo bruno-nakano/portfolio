@@ -92,7 +92,7 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
     },
   ];
 
-  const LOVE_METER_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov';
+  const LOVE_METER_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif';
   const WHOOPEE_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp';
   const MOOD_CAL_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/vPnekYcregwTEjzX.webp';
   const INSTAGRAM_UNLOCK_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp';
@@ -115,7 +115,7 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       tags: ['Fun', 'Personal'],
       hoverImg: LOVE_METER_IMG,
       media: [
-        { type: 'mp4', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov', videoWidth: 'min(400px, 60vw)', aspectRatio: '9/16' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif', maxWidth: 'min(500px, 80vw)' },
       ] as { type: string; url: string; [key: string]: any }[]
     },
     {
@@ -1904,7 +1904,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         { id: 'mcdonalds-emlings', title: "McDONALD'S [EMLINGS]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BmylwDPzFqnMlzuH.gif' },
         { id: 'samsung-s-drive', title: 'SAMSUNG [S-DRIVE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif' },
         { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/vPnekYcregwTEjzX.webp' },
-        { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov' },
+        { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif' },
         { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LAnesvkARREDjyGm.mov' },
         { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp' },
         { id: 'instagram-unlocker', title: 'LEARN TO UNLOCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
