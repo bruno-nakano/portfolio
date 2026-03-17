@@ -92,9 +92,9 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
     },
   ];
 
-  const LOVE_METER_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.43.39PM_c2792292.webp';
+  const LOVE_METER_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov';
   const WHOOPEE_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp';
-  const MOOD_CAL_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.46.15PM_ffc726ff.png';
+  const MOOD_CAL_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/vPnekYcregwTEjzX.webp';
   const INSTAGRAM_UNLOCK_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp';
 
   const experiments = [
@@ -114,11 +114,24 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       description: 'A vibe-coded love meter that answers the most important question.',
       tags: ['Fun', 'Personal'],
       hoverImg: LOVE_METER_IMG,
-      media: [] as { type: string; url: string }[]
+      media: [
+        { type: 'mp4', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov', videoWidth: 'min(400px, 60vw)', aspectRatio: '9/16' },
+      ] as { type: string; url: string; [key: string]: any }[]
+    },
+    {
+      id: 'poster-3d',
+      title: '(06) Poster.3D',
+      tagline: 'TURN ANY IMAGE INTO A 3D ROTATING ANIMATION',
+      description: 'Browser-based tool that takes any static image (JPEG, PNG, or WebP) and instantly transforms it into a 3D rotating animation — rendered in real-time using WebGL (Three.js). No server, no upload to any cloud, no account needed. Everything runs entirely in your browser.',
+      tags: ['Creative Coding', 'WebGL', 'Tool'],
+      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LAnesvkARREDjyGm.mov',
+      linkHref: 'https://poster3d-cseabzsj.manus.space/',
+      linkText: 'Try it at poster3d-cseabzsj.manus.space',
+      media: [] as { type: string; url: string; [key: string]: any }[]
     },
     {
       id: 'whoopee-cushion',
-      title: '(06) The Whoopinator',
+      title: '(07) The Whoopinator',
       tagline: 'DIGITAL PRANKS REIMAGINED',
       description: 'A playful web experiment bringing classic pranks into the digital age.',
       tags: ['Fun', 'Audio'],
@@ -127,7 +140,7 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
     },
     {
       id: 'instagram-unlocker',
-      title: '(07) Learn to Unlock',
+      title: '(08) Learn to Unlock',
       tagline: 'EARN YOUR SCREEN TIME',
       description: 'Answer trivia questions to unlock Instagram for 10 minutes. A quiz-gated social media timer.',
       tags: ['Social Media', 'Tool'],
@@ -342,6 +355,13 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
               <div className="pb-6" style={{background:"#000000",color:"#ffffff"}}>
                 <p className="text-[11px] font-bold uppercase mb-2">{project.tagline}</p>
                 <p className="text-[11px] mb-2">{project.description}</p>
+                {(project as any).linkHref && (
+                  <p className="text-[11px] mb-4">
+                    <a href={(project as any).linkHref} target="_blank" rel="noopener noreferrer" className="underline font-bold">
+                      {(project as any).linkText || (project as any).linkHref}
+                    </a>
+                  </p>
+                )}
                 {((project as any).agency || (project as any).production) && (
                   <p className="text-[9px] uppercase mb-6 opacity-70 tracking-wide">
                     {(project as any).agency && <span>[{(project as any).agency}]</span>}
@@ -349,7 +369,27 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
                     {(project as any).production && <span>[{(project as any).production}]</span>}
                   </p>
                 )}
-
+                {(project as any).media && (project as any).media.length > 0 && (
+                  <div className="flex flex-wrap gap-4 mt-4">
+                    {(project as any).media.map((item: any, idx: number) => (
+                      <div key={idx}>
+                        {(item.type === 'mp4' || item.type === 'mov') ? (
+                          <video
+                            src={item.url}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            controls
+                            style={{ width: item.videoWidth || 'min(400px, 70vw)', aspectRatio: item.aspectRatio || '9/16' }}
+                          />
+                        ) : item.type === 'image' ? (
+                          <img src={item.url} alt="" style={{ maxWidth: item.maxWidth || '400px' }} />
+                        ) : null}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -383,8 +423,9 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
           : hoverImage.projectId === 'samsung-s-drive'
           ? 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif'
           : 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LnEmDtMqVIVPRBLC.gif';
-        const imgSrc = experimentHoverImg || interactiveHoverImg;
+        const mediaSrc = experimentHoverImg || interactiveHoverImg;
         const isExperiment = !!experimentHoverImg;
+        const isVideo = mediaSrc.endsWith('.mov') || mediaSrc.endsWith('.mp4');
         return (
           <div
             className="fixed pointer-events-none z-50"
@@ -394,11 +435,22 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
               transform: 'translate(0, 0)'
             }}
           >
-            <img
-              src={imgSrc}
-              alt="Project preview"
-              className={isExperiment ? 'w-[160px] h-auto' : 'w-[120px] h-auto'}
-            />
+            {isVideo ? (
+              <video
+                src={mediaSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className={isExperiment ? 'w-[160px] h-auto' : 'w-[120px] h-auto'}
+              />
+            ) : (
+              <img
+                src={mediaSrc}
+                alt="Project preview"
+                className={isExperiment ? 'w-[160px] h-auto' : 'w-[120px] h-auto'}
+              />
+            )}
           </div>
         );
       })()}
@@ -1817,6 +1869,7 @@ const PROJECT_TO_SECTION: Record<string, string> = {
   'samsung-s-drive': 'interactive',
   'mood-calendar': 'interactive',
   'love-meter': 'interactive',
+  'poster-3d': 'interactive',
   'whoopee-cushion': 'interactive',
   'instagram-unlocker': 'interactive',
   // Social
@@ -1850,8 +1903,9 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         { id: 'samsung-diplo', title: "SAMSUNG X DIPLO [CAN'T STOP]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/xXvnNMChIHQzGOdH.gif' },
         { id: 'mcdonalds-emlings', title: "McDONALD'S [EMLINGS]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BmylwDPzFqnMlzuH.gif' },
         { id: 'samsung-s-drive', title: 'SAMSUNG [S-DRIVE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif' },
-        { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.46.15PM_ffc726ff.png' },
-        { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.43.39PM_c2792292.webp' },
+        { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/vPnekYcregwTEjzX.webp' },
+        { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mpirlHPuvUVXQSin.mov' },
+        { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LAnesvkARREDjyGm.mov' },
         { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp' },
         { id: 'instagram-unlocker', title: 'LEARN TO UNLOCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
       ]
