@@ -106,10 +106,10 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       tags: ['Creative Coding', 'Data Viz'],
       hoverImg: MOOD_CAL_IMG,
       media: [
-        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp', maxWidth: 'min(500px, 80vw)' },
-        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/eTLpEhXQdCMMsErK.png', maxWidth: 'min(400px, 70vw)' },
-        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/gehppVuuZNgkbJhJ.png', maxWidth: 'min(400px, 70vw)' },
-        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/YYedkQnLKbLlcwVh.png', maxWidth: 'min(400px, 70vw)' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp', maxWidth: 'min(300px, 55vw)' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/eTLpEhXQdCMMsErK.png', maxWidth: 'min(260px, 45vw)' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/gehppVuuZNgkbJhJ.png', maxWidth: 'min(260px, 45vw)' },
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/YYedkQnLKbLlcwVh.png', maxWidth: 'min(260px, 45vw)' },
       ] as { type: string; url: string; [key: string]: any }[]
     },
     {
