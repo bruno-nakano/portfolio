@@ -133,6 +133,7 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       linkHref: 'https://poster3d-cseabzsj.manus.space/',
       linkText: 'Try it at poster3d-cseabzsj.manus.space',
       media: [
+        { type: 'video', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/TbXMAtuGNhKslUEa.mov' },
         { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pAQzwsyJJllvdawh.gif', maxWidth: 'min(600px, 90vw)' },
       ] as { type: string; url: string; [key: string]: any }[]
     },
@@ -997,7 +998,7 @@ export function CampaignContent({ activeTags = [], onTagClick, initialExpandedPr
       agency: 'Agency: FCB West',
       production: 'Production Company: Radical Media',
       tags: ['Campaign', 'Social Impact', 'Brand'],
-      hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Screenshot2026-03-05at7.25.15PM_d35c9d64.png',
+      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/iNGsyYpiapxyHSKi.webp',
       media: [
         { type: 'vimeo', url: 'https://player.vimeo.com/video/1170893097?badge=0&autopause=0&player_id=0&app_id=58479' },
         { type: 'vimeo', url: 'https://player.vimeo.com/video/306292196?badge=0&autopause=0&player_id=0&app_id=58479' },
@@ -1933,7 +1934,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
       projects: [
         { id: 'facebook-eoy', title: 'FACEBOOK [END OF THE YEAR]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/11111_ac2b5ad0.jpg' },
         { id: 'libero-football', title: 'LIBERO MAGAZINE [FOOTBALL ANALOGIES]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/football-analogies-libero-magazine-1_0f1359f7.gif' },
-        { id: 'levis-vote', title: "LEVI'S [USE YOUR VOTE]", thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Screenshot2026-03-05at7.25.15PM_d35c9d64.png' },
+        { id: 'levis-vote', title: "LEVI'S [USE YOUR VOTE]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/iNGsyYpiapxyHSKi.webp' },
         { id: 'samsung-unbox', title: 'SAMSUNG [UNBOX YOUR PHONE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-93a9b73094d5(1)_cb611700.gif' },
         { id: 'wwf-just', title: 'WWF [JUST*]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-14at7.25.46PM_d7268fba.webp' },
         { id: 'facebook-real-story', title: 'FACEBOOK (A REAL FACEBOOK STORY)', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/akosua_b00f2ded.gif' },
