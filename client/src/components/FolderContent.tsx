@@ -124,10 +124,12 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       tagline: 'TURN ANY IMAGE INTO A 3D ROTATING ANIMATION',
       description: 'Browser-based tool that takes any static image (JPEG, PNG, or WebP) and instantly transforms it into a 3D rotating animation — rendered in real-time using WebGL (Three.js). No server, no upload to any cloud, no account needed. Everything runs entirely in your browser.',
       tags: ['Creative Coding', 'WebGL', 'Tool'],
-      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LAnesvkARREDjyGm.mov',
+      hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/MCNVTEsZndNlANGI.gif',
       linkHref: 'https://poster3d-cseabzsj.manus.space/',
       linkText: 'Try it at poster3d-cseabzsj.manus.space',
-      media: [] as { type: string; url: string; [key: string]: any }[]
+      media: [
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/MCNVTEsZndNlANGI.gif', maxWidth: 'min(600px, 90vw)' },
+      ] as { type: string; url: string; [key: string]: any }[]
     },
     {
       id: 'whoopee-cushion',
@@ -1905,7 +1907,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         { id: 'samsung-s-drive', title: 'SAMSUNG [S-DRIVE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif' },
         { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/vPnekYcregwTEjzX.webp' },
         { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif' },
-        { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/LAnesvkARREDjyGm.mov' },
+        { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/MCNVTEsZndNlANGI.gif' },
         { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp' },
         { id: 'instagram-unlocker', title: 'LEARN TO UNLOCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
       ]
