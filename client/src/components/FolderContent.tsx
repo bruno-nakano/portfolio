@@ -93,7 +93,7 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
   ];
 
   const LOVE_METER_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif';
-  const WHOOPEE_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp';
+  const WHOOPEE_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif';
   const MOOD_CAL_IMG = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp';
   const INSTAGRAM_UNLOCK_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp';
 
@@ -143,7 +143,9 @@ export function PrototypesContent({ activeTags = [], onTagClick, initialExpanded
       description: 'A playful web experiment bringing classic pranks into the digital age.',
       tags: ['Fun', 'Audio'],
       hoverImg: WHOOPEE_IMG,
-      media: [] as { type: string; url: string }[]
+      media: [
+        { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif', maxWidth: 'min(600px, 90vw)' },
+      ] as { type: string; url: string; [key: string]: any }[]
     },
     {
       id: 'instagram-unlocker',
@@ -1913,7 +1915,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp' },
         { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif' },
         { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/MCNVTEsZndNlANGI.gif' },
-        { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at7.44.01PM_55331288.webp' },
+        { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif' },
         { id: 'instagram-unlocker', title: 'LEARN TO UNLOCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
       ]
     },
