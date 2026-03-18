@@ -1430,7 +1430,7 @@ export function EventsContent({ activeTags = [], onTagClick, initialExpandedProj
       id: 'meta-connect-2025',
       title: '(01) Meta [Connect 2025]',
       tagline: "META'S BIGGEST ANNUAL MIXED REALITY & AI EVENT",
-      description: "Meta Connect is Meta's biggest annual event where the company shares the latest developments in mixed reality, AI and wearables.",
+      description: "Meta Connect is the company's biggest and most important event, where Mark Zuckerberg takes the stage to share the latest products, vision, and what's coming next.\n\nOnce again, I led the creative direction for the event, overseeing a full team of creative directors, artists, designers, and partners across product, comms, and marketing. I managed simultaneously multiple workstreams, making sure everything stayed aligned and worked together as one clear, cohesive story. From concept to script to production, my role was to keep the whole thing tight, simple, and engaging while turning complex ideas into something people could actually get.",
       agency: '',
       production: '',
       tags: ['Events', 'Activation', 'Meta'],
