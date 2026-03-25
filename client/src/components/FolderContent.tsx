@@ -2335,7 +2335,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
     },
   ];
 
-  const THUMB_H = 160;
+  const THUMB_MAX_H = 220;
 
   return (
     <div className="p-6 overflow-y-auto h-full" style={{ background: '#000000', color: '#ffffff' }}>
@@ -2393,9 +2393,6 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                     {project.media.map((item, idx) => {
                       const { src, isVideo } = getMediaThumb(item);
                       const isImage = item.type === 'image';
-                      const ar = (item as any).aspectRatio;
-                      const isPortrait = ar === '4/5';
-                      const w = isPortrait ? Math.round(THUMB_H * 0.8) : Math.round(THUMB_H * (16 / 9));
 
                       return (
                         <div
@@ -2404,18 +2401,20 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                           style={{
                             position: 'relative',
                             flexShrink: 0,
-                            width: `${w}px`,
-                            height: `${THUMB_H}px`,
+                            maxHeight: `${THUMB_MAX_H}px`,
                             background: '#111',
                             overflow: 'hidden',
                             cursor: isClickable ? 'pointer' : 'default',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                           }}
                         >
                           {isImage ? (
                             <img
                               src={item.url}
                               alt=""
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                              style={{ maxHeight: `${THUMB_MAX_H}px`, width: 'auto', display: 'block', objectFit: 'contain' }}
                               onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0'; }}
                             />
                           ) : src ? (
@@ -2423,7 +2422,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                               <img
                                 src={src}
                                 alt=""
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                style={{ maxHeight: `${THUMB_MAX_H}px`, width: 'auto', display: 'block', objectFit: 'contain' }}
                                 onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0'; }}
                               />
                               {/* Play icon overlay */}
@@ -2453,8 +2452,8 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                           ) : (
                             /* mp4 / mov with no thumbnail — show dark tile with play icon */
                             <div style={{
-                              width: '100%',
-                              height: '100%',
+                              width: `${Math.round(THUMB_MAX_H * 16 / 9)}px`,
+                              height: `${THUMB_MAX_H}px`,
                               background: '#1a1a1a',
                               display: 'flex',
                               alignItems: 'center',
