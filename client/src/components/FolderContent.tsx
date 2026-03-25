@@ -1905,143 +1905,584 @@ const PROJECT_TO_SECTION: Record<string, string> = {
   'meta-connect-2025': 'events',
 };
 
+
 export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: string, projectId?: string) => void }) {
-  const allSections = [
+  // Helper: extract a displayable thumbnail URL from a media item
+  function getMediaThumb(item: { type: string; url: string; [key: string]: any }): { src: string; isVideo: boolean } {
+    if (item.type === 'image') return { src: item.url, isVideo: false };
+    if (item.type === 'mp4' || item.type === 'video') return { src: '', isVideo: true };
+    if (item.type === 'vimeo') {
+      // Extract vimeo ID from embed URL
+      const m = item.url.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+      if (m) return { src: `https://vumbnail.com/${m[1]}.jpg`, isVideo: true };
+      return { src: '', isVideo: true };
+    }
+    if (item.type === 'youtube') {
+      const m = item.url.match(/embed\/([^?]+)/);
+      if (m) return { src: `https://img.youtube.com/vi/${m[1]}/hqdefault.jpg`, isVideo: true };
+      return { src: '', isVideo: true };
+    }
+    return { src: item.url, isVideo: false };
+  }
+
+  // All project data inline (mirrors the data in each content component)
+  const allSections: Array<{
+    label: string;
+    sectionId: string;
+    projects: Array<{ id: string; title: string; hoverImg?: string; media: Array<{ type: string; url: string; [key: string]: any }> }>;
+    isCarousel?: boolean;
+    carouselImages?: string[];
+  }> = [
     {
       label: 'INTERACTIVE',
+      sectionId: 'interactive',
       projects: [
-        { id: 'samsung-diplo', title: "SAMSUNG X DIPLO [CAN'T STOP]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/xXvnNMChIHQzGOdH.gif' },
-        { id: 'mcdonalds-emlings', title: "McDONALD'S [EMLINGS]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BmylwDPzFqnMlzuH.gif' },
-        { id: 'samsung-s-drive', title: 'SAMSUNG [S-DRIVE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif' },
-        { id: 'mood-calendar', title: 'MOOD CALENDAR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp' },
-        { id: 'love-meter', title: 'LOVE-O-METER', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif' },
-        { id: 'poster-3d', title: 'POSTER.3D', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pAQzwsyJJllvdawh.gif' },
-        { id: 'whoopee-cushion', title: 'THE WHOOPINATOR', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif' },
-        { id: 'instagram-unlocker', title: 'LEARN TO UNLOCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
+        {
+          id: 'samsung-diplo',
+          title: "SAMSUNG X DIPLO [CAN'T STOP]",
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/xXvnNMChIHQzGOdH.gif',
+          media: [
+            { type: 'video', url: 'https://vimeo.com/217188315' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/uGdlSKPSGtBQrFuE.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FaGpapXCNhQUaRcm.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/xXvnNMChIHQzGOdH.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CPXWQSYjyWAXGKdw.gif' },
+          ]
+        },
+        {
+          id: 'mcdonalds-emlings',
+          title: "McDONALD'S [EMLINGS]",
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BmylwDPzFqnMlzuH.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/334615998?badge=0&autopause=0&player_id=0&app_id=58479' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oVYCfdUVvdIIWyny.png' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/yzspyztZdyAMXtUk.png' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BmylwDPzFqnMlzuH.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/iHHNQmahOnbwGonZ.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/UWdVTsqwqOIcdarH.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/eNuJomcvUcIPIuJx.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ZlHYGShdCcShGHIU.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/TNZWkPVBhCIAWaPU.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ARIgZOhyWOqEOluJ.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/QCjxNORjawpCXsbI.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pzGXxSviSBJQYmzC.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/SeyKZQNIxVxyJiPq.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/DTYsCwDNViReJDFZ.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/kPMNzsnBlFMmQzAL.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/zcfVhFNQhvYMxnla.jpg' },
+          ]
+        },
+        {
+          id: 'samsung-s-drive',
+          title: 'SAMSUNG [S-DRIVE]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/343710550' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/219596551' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/49424455075641.5d4132e539b75_4c6ca02e.gif' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/36c4d655075641.5d4135ab84f41_5dd89a8f.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/2d5f0255075641.5d4132e58d3c0_ae3590eb.jpeg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/aaaaaa-2(1)_b2083aae.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/s-02-2000x1519-1(1)_c9c5863c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/posters_3d5cb432.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/s1(1)_d6038a28.gif' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/S-Drive-Design-Case-Study1(1)_b5a95fcf.gif' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/vS-Drive-Design-Case-Study_3020c507.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-b8629a5cef27_02f09d4c.gif' },
+          ]
+        },
+        {
+          id: 'mood-calendar',
+          title: 'MOOD CALENDAR',
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp',
+          media: [
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/BohndpCczayUhLRz.webp' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/eTLpEhXQdCMMsErK.png' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/gehppVuuZNgkbJhJ.png' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/YYedkQnLKbLlcwVh.png' },
+          ]
+        },
+        {
+          id: 'love-meter',
+          title: 'LOVE-O-METER',
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif',
+          media: [
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/FqZUEkFKBDsqgrMJ.gif' },
+          ]
+        },
+        {
+          id: 'poster-3d',
+          title: 'POSTER.3D',
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pAQzwsyJJllvdawh.gif',
+          media: [
+            { type: 'mp4', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/TbXMAtuGNhKslUEa.mov' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pAQzwsyJJllvdawh.gif' },
+          ]
+        },
+        {
+          id: 'whoopee-cushion',
+          title: 'THE WHOOPINATOR',
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif',
+          media: [
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/pZAmffwXWzvtAGVp.gif' },
+          ]
+        },
+        {
+          id: 'instagram-unlocker',
+          title: 'LEARN TO UNLOCK',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp',
+          media: [
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-12at8.53.47PM_a3120d72.webp' },
+          ]
+        },
       ]
     },
     {
       label: 'SOCIAL AND PR',
+      sectionId: 'social',
       projects: [
-        { id: 'social-01', title: '@ZUCK', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/download(8)_c34ba657.jpeg' },
-        { id: 'social-02', title: 'FACEBOOK (I WANNA ROCK)', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-525ea5da065d(1)_4b841a17.gif' },
-        { id: 'social-03', title: 'FACEBOOK (HOUSE OF HORRORS)', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/ezgif-80d9ca958b65d964_9784c73e.gif' },
-        { id: 'facebook-mindfull', title: 'FACEBOOK (MINDFULL)', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-9da134f664ea(1)_bb4e7901.gif' },
+        {
+          id: 'social-01',
+          title: '@ZUCK',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/download(8)_c34ba657.jpeg',
+          media: [
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/download(8)_c34ba657.jpeg' },
+          ]
+        },
+        {
+          id: 'social-02',
+          title: 'FACEBOOK (I WANNA ROCK)',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-525ea5da065d(1)_4b841a17.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/435655934' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/435655396' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/435655053' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/435654761' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/mood-2000x1251_5c73fc1f.jpg' },
+          ]
+        },
+        {
+          id: 'social-03',
+          title: 'FACEBOOK (HOUSE OF HORRORS)',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/ezgif-80d9ca958b65d964_9784c73e.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371704647' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371744962' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371704689' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371704672' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/jjh-copy-1-2000x2501_2b1bad90.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/fb_halloween_hauntedhouse_interior_v1_001-1535x1920(1)_d20c9b0a.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/jjh-2000x2501(1)_c3875392.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_dining_food-1920x1500_e9071cea.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_dining_table_set-1920x1500_5bea1b1c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_lab_vials-1920x1500_a7cd8d42.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_lab_tank_cabinet-1920x1500_1919cd0c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_attic_stairs_detail-1920x1500_cca3aae6.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_attic_lights-1920x1500_c7724193.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_study_mgk_sheet01-1920x1500(1)_c06ad717.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_study_sheet04_astronomyroom-1920x1500_f37680c4.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/int_all_windows-1920x1500(1)_80ef703e.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/mouth_mask1-1-2000x1125(1)_bcaa547f.jpg' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371745605' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371745632' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/371745670' },
+          ]
+        },
+        {
+          id: 'facebook-mindfull',
+          title: 'FACEBOOK (MINDFULL)',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-9da134f664ea(1)_bb4e7901.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/429384060' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/432946376' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/429384778' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/432946669' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/432945889' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/429385150' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/432948234' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/everything-2000x1235_b21af245.png' },
+          ]
+        },
       ]
     },
     {
       label: 'CAMPAIGN',
+      sectionId: 'campaign',
       projects: [
-        { id: 'facebook-eoy', title: 'FACEBOOK [END OF THE YEAR]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/11111_ac2b5ad0.jpg' },
-        { id: 'libero-football', title: 'LIBERO MAGAZINE [FOOTBALL ANALOGIES]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/football-analogies-libero-magazine-1_0f1359f7.gif' },
-        { id: 'levis-vote', title: "LEVI'S [USE YOUR VOTE]", thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/iNGsyYpiapxyHSKi.webp' },
-        { id: 'samsung-unbox', title: 'SAMSUNG [UNBOX YOUR PHONE]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-93a9b73094d5(1)_cb611700.gif' },
-        { id: 'wwf-just', title: 'WWF [JUST*]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-14at7.25.46PM_d7268fba.webp' },
-        { id: 'facebook-real-story', title: 'FACEBOOK (A REAL FACEBOOK STORY)', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/akosua_b00f2ded.gif' },
+        {
+          id: 'facebook-eoy',
+          title: 'FACEBOOK [END OF THE YEAR]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/11111_ac2b5ad0.jpg',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/508194471' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Adweek-01_1340_c_b06a9bd0.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Adweek-02_1340_c_d5b3494c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Adweek-03_1340_c_d840ea73.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Adweek-04_1340_c_cf29b955.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Adweek-05_1340_c_d6f710bc.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/Hivemind_new_1000_9ec57d71.jpg' },
+          ]
+        },
+        {
+          id: 'libero-football',
+          title: 'LIBERO MAGAZINE [FOOTBALL ANALOGIES]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/football-analogies-libero-magazine-1_0f1359f7.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170568733' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170568802' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170568786' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170568766' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/screen-shot-2018-05-17-at-10.46.07-pm-copy-2000x1707_d3076bcf.jpg' },
+          ]
+        },
+        {
+          id: 'levis-vote',
+          title: "LEVI'S [USE YOUR VOTE]",
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/iNGsyYpiapxyHSKi.webp',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170893097' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/306292196' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/p01-1158x1637_cb835cf8.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/p02-1158x1637_dfe756f3.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/p05-1158x1637_faed9496.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/p07-1158x1637_2f0314d4.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/mooood_dbed463e.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/tweeet-2000x996_53e8e0f9.png' },
+          ]
+        },
+        {
+          id: 'samsung-unbox',
+          title: 'SAMSUNG [UNBOX YOUR PHONE]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-93a9b73094d5(1)_cb611700.gif',
+          media: [
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/aaaa-2000x1380_8746a43f.jpg' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/217187282' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/KV-MOTORCYCLE-0328_a4c47c47.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/image-asset-3_9dc34a40.jpeg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/image-asset_8ae1229d.png' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/image-asset-2_250d46ed.jpeg' },
+          ]
+        },
+        {
+          id: 'wwf-just',
+          title: 'WWF [JUST*]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/Screenshot2026-03-14at7.25.46PM_d7268fba.webp',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286728221' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286728178' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286728142' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286728073' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727955' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727917' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727866' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727786' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727709' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727673' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727603' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/286727384' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/ezgif-6-adf1265cdcd1_838c0a00.gif' },
+          ]
+        },
+        {
+          id: 'facebook-real-story',
+          title: 'FACEBOOK (A REAL FACEBOOK STORY)',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/akosua_b00f2ded.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170574267' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170574311' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1170574333' },
+          ]
+        },
       ]
     },
     {
       label: 'BRAND AND IDENTITY',
+      sectionId: 'brand',
       projects: [
-        { id: 'wwf-just-brand', title: 'WWF [JUST*]', thumb: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg' },
-        { id: 'studio-mano', title: 'STUDIO MANO', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-1_13a71f69.jpg' },
-        { id: 'facebook-rebrand', title: 'FACEBOOK [RE-BRANDING]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-thumb_d2c892e3.avif' },
-        { id: 'bundaberg-rum', title: 'BUNDABERG RUM [BLENDING KIT]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-label_37e928ed.jpg' },
+        {
+          id: 'wwf-just-brand',
+          title: 'WWF [JUST*]',
+          hoverImg: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg',
+          media: [
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/oLbmjUPUMWJrGWMO.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/CFPgqAIsIykasLty.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/yQgxQEFMfbaJXknc.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ucPOkqJsCaxnZUMU.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/rmaoShGYBzogksqG.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/ogNzsSdcHxamGKja.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/mMsoyexyObTDkdTl.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/YvnarBzOvYueLGuU.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/QKNljSyKJUUDdcNW.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/tAvomcXyyvCSjbYG.gif' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/just01-1-2000x786_8c2c3a6f.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/just02-2-2000x1380-1_2c0c7c8b.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/Ajust04_1f5e9e4b.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/Ajust05_e9e3c9d5.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/Ajust06_f9d5c3b2.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/Ajust07_a1b2c3d4.jpg' },
+            { type: 'image', url: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/Ajust08_b2c3d4e5.jpg' },
+          ]
+        },
+        {
+          id: 'studio-mano',
+          title: 'STUDIO MANO',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-1_13a71f69.jpg',
+          media: [
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-1_13a71f69.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-3_82234393.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-4_8698e3dd.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-2_f7864d2a.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-mezcal-5_0b03d4a3.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-toro01_8a78e6e1.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-toro04_4cf122e4.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-lamp-1_40dbd8aa.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-lamp-4_e5c4b093.png' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-lamp-2_d76fe089.png' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/sm-lamp-3_80dec66c.png' },
+          ]
+        },
+        {
+          id: 'facebook-rebrand',
+          title: 'FACEBOOK [RE-BRANDING]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-thumb_d2c892e3.avif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1173696908' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-video1_78e76c26.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-video2_35c7c0d3.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/fb-rebrand-video3_94dd6167.mp4' },
+          ]
+        },
+        {
+          id: 'bundaberg-rum',
+          title: 'BUNDABERG RUM [BLENDING KIT]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-label_37e928ed.jpg',
+          media: [
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-kit_14f77af0.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-bottles_c2e818a2.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-spread_dcd6c551.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-label_37e928ed.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-notebook_7b1fb135.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/bundaberg-top_d07bbd9a.jpg' },
+          ]
+        },
       ]
     },
     {
       label: 'EVENTS AND ACTIVATIONS',
+      sectionId: 'events',
       projects: [
-        { id: 'meta-connect-2025', title: 'META [CONNECT 2025]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-stage_4e7dd518.webp' },
-        { id: 'meta-connect-2024', title: 'META [CONNECT 2024]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-zuck-orion_a980dc7c.jpg' },
-        { id: 'mr-lee', title: 'PLAYSTATION [MR. LEE TAILOR SHOP]', thumb: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/playstation-mr-lee-tailor-shop(1)_d915f8ea.gif' },
+        {
+          id: 'meta-connect-2025',
+          title: 'META [CONNECT 2025]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-stage_4e7dd518.webp',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1173692006' },
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/1173696951' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v1_1c2ba021.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v2_6df7957e.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v3_8c61815a.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v4_2e18c0b2.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v5_2d9b6a6f.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v6_2485b4c2.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v7_2effee1d.mp4' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-v8_c021aded.mp4' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-stage_4e7dd518.webp' },
+          ]
+        },
+        {
+          id: 'meta-connect-2024',
+          title: 'META [CONNECT 2024]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-zuck-orion_a980dc7c.jpg',
+          media: [
+            { type: 'youtube', url: 'https://www.youtube.com/embed/I7JyydkqDeI' },
+            { type: 'mp4', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-2024-video_fdc53507.mp4' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-2024-1_18ddc230.gif' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-2024-2_61d2b181.gif' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-zuck-orion_a980dc7c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/meta-connect-glasses-stage_692dfd46.jpg' },
+          ]
+        },
+        {
+          id: 'mr-lee',
+          title: 'PLAYSTATION [MR. LEE TAILOR SHOP]',
+          hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/playstation-mr-lee-tailor-shop(1)_d915f8ea.gif',
+          media: [
+            { type: 'vimeo', url: 'https://player.vimeo.com/video/435860958' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/01-2000x1254(1)_3dec4caa.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/mktdirecto02-2000x1012_7d9d238c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/02-2000x1333(1)_b8281d10.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/03-2000x1333(2)_941e377b.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/04-2000x1400_7e12b80f.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/05-2000x1400_a9e6a18c.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/06-2000x1333(1)_0bf74c2a.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/07-2000x1333_050f519e.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/close04-2000x1333(1)_9f897b34.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/close05-2000x1333(1)_58624dfb.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/close06-2000x1333_868f1e4d.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/close07-2000x1333_3ed755cf.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/img_2556-2000x1333_a3fdc0c9.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/batman-2000x2796(1)_18724cf4.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/greenlantern-2000x2796_05e4d8a1.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/flash-2000x2796_8462f3f3.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/superman-2000x2796(1)_78368180.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/hawke-2000x2796_60f16f5b.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/sandman-2000x2796_457180a4.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/poster01-2000x3143(1)_03b9c54a.jpg' },
+            { type: 'image', url: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/cYAURdpDEAqYwgnUsFrt8S/poster02-2000x3143_f670d0fc.jpg' },
+          ]
+        },
       ]
-    },
-    {
-      label: 'DESIGN AND ILLUSTRATION',
-      // carousel — images pulled from the same list as DesignContent
-      projects: DESIGN_IMAGES.map((url, i) => ({ id: `design-${i}`, title: '', thumb: url }))
-    },
-    {
-      label: 'POTTERY AND FURNITURE',
-      // carousel — images pulled from the same list as PotteryContent
-      projects: POTTERY_IMAGES.map((url, i) => ({ id: `pottery-${i}`, title: '', thumb: url }))
     },
   ];
 
-  // Carousel sections that scroll horizontally without labels
-  const carouselSectionLabels = new Set(['DESIGN AND ILLUSTRATION', 'POTTERY AND FURNITURE']);
+  const THUMB_H = 160;
 
   return (
     <div className="p-6 overflow-y-auto h-full" style={{ background: '#000000', color: '#ffffff' }}>
       {allSections.map((section) => (
-        <div key={section.label} className="mb-8">
-          <h2 style={{ fontFamily: 'Arial Narrow, Arial, sans-serif', fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '12px', color: '#ffffff', letterSpacing: '0.05em' }}>
+        <div key={section.label} className="mb-10">
+          {/* Section header */}
+          <h2 style={{
+            fontFamily: 'Arial Narrow, Arial, sans-serif',
+            fontSize: '11px',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            marginBottom: '16px',
+            color: '#ffffff',
+            letterSpacing: '0.05em',
+            borderBottom: '1px solid #333',
+            paddingBottom: '6px',
+          }}>
             {section.label}
           </h2>
-          {carouselSectionLabels.has(section.label) ? (
-            <CarouselRow images={section.projects.map(p => p.thumb).filter(Boolean) as string[]} />
-          ) : (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-              {section.projects.map((project) => {
-                const sectionId = PROJECT_TO_SECTION[project.id];
-                const isClickable = !!sectionId && !!onProjectClick;
-                return (
+
+          {/* Projects */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {section.projects.map((project) => {
+              const isClickable = !!onProjectClick;
+              return (
+                <div key={project.id}>
+                  {/* Project title */}
                   <div
-                    key={project.id}
-                    onClick={isClickable ? () => onProjectClick!(sectionId, project.id) : undefined}
+                    onClick={isClickable ? () => onProjectClick!(section.sectionId, project.id) : undefined}
                     style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '4px',
-                      width: '160px',
+                      fontFamily: 'Arial Narrow, Arial, sans-serif',
+                      fontSize: '9px',
+                      fontWeight: 'bold',
+                      textTransform: 'uppercase',
+                      color: '#ffffff',
+                      letterSpacing: '0.05em',
+                      marginBottom: '8px',
                       cursor: isClickable ? 'pointer' : 'default',
+                      textDecoration: isClickable ? 'underline' : 'none',
+                      textUnderlineOffset: '2px',
                     }}
                   >
-                    <div
-                      style={{
-                        width: '160px',
-                        height: '120px',
-                        border: 'none',
-                        background: '#111111',
-                        overflow: 'hidden',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'opacity 0.15s',
-                      }}
-                      onMouseEnter={e => { if (isClickable) (e.currentTarget as HTMLDivElement).style.opacity = '0.75'; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.opacity = '1'; }}
-                    >
-                      {project.thumb ? (
-                        <img
-                          src={project.thumb}
-                          alt={project.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                        />
-                      ) : null}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: 'Arial Narrow, Arial, sans-serif',
-                        fontSize: '9px',
-                        fontWeight: 'bold',
-                        textTransform: 'uppercase',
-                        color: isClickable ? '#ffffff' : '#666666',
-                        lineHeight: 1.3,
-                        letterSpacing: '0.03em',
-                        textDecoration: isClickable ? 'underline' : 'none',
-                        textUnderlineOffset: '2px',
-                      }}
-                    >
-                      {project.title}
-                    </div>
+                    {project.title}
                   </div>
-                );
-              })}
-            </div>
-          )}
+
+                  {/* Horizontal scrolling media strip */}
+                  <div style={{
+                    display: 'flex',
+                    gap: '6px',
+                    overflowX: 'auto',
+                    paddingBottom: '4px',
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: '#444 transparent',
+                  }}>
+                    {project.media.map((item, idx) => {
+                      const { src, isVideo } = getMediaThumb(item);
+                      const isImage = item.type === 'image';
+                      const ar = (item as any).aspectRatio;
+                      const isPortrait = ar === '4/5';
+                      const w = isPortrait ? Math.round(THUMB_H * 0.8) : Math.round(THUMB_H * (16 / 9));
+
+                      return (
+                        <div
+                          key={idx}
+                          onClick={isClickable ? () => onProjectClick!(section.sectionId, project.id) : undefined}
+                          style={{
+                            position: 'relative',
+                            flexShrink: 0,
+                            width: `${w}px`,
+                            height: `${THUMB_H}px`,
+                            background: '#111',
+                            overflow: 'hidden',
+                            cursor: isClickable ? 'pointer' : 'default',
+                          }}
+                        >
+                          {isImage ? (
+                            <img
+                              src={item.url}
+                              alt=""
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                              onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0'; }}
+                            />
+                          ) : src ? (
+                            <>
+                              <img
+                                src={src}
+                                alt=""
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = '0'; }}
+                              />
+                              {/* Play icon overlay */}
+                              <div style={{
+                                position: 'absolute',
+                                inset: 0,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                background: 'rgba(0,0,0,0.25)',
+                              }}>
+                                <div style={{
+                                  width: '28px',
+                                  height: '28px',
+                                  borderRadius: '50%',
+                                  background: 'rgba(255,255,255,0.85)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                }}>
+                                  <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                    <path d="M1 1L9 6L1 11V1Z" fill="#000" />
+                                  </svg>
+                                </div>
+                              </div>
+                            </>
+                          ) : (
+                            /* mp4 / mov with no thumbnail — show dark tile with play icon */
+                            <div style={{
+                              width: '100%',
+                              height: '100%',
+                              background: '#1a1a1a',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}>
+                              <div style={{
+                                width: '28px',
+                                height: '28px',
+                                borderRadius: '50%',
+                                background: 'rgba(255,255,255,0.3)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                              }}>
+                                <svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                                  <path d="M1 1L9 6L1 11V1Z" fill="#fff" />
+                                </svg>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
