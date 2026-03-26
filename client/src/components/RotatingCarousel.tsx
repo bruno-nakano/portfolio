@@ -181,7 +181,7 @@ export default function RotatingCarousel({ onSectionClick }: RotatingCarouselPro
             }}
           >
             <div className="bg-white border-2 border-black px-3 py-2">
-              <div className="font-['Arial_Narrow',Arial,sans-serif] font-bold text-xs uppercase whitespace-nowrap">
+              <div className="text-[13px] font-semibold whitespace-nowrap" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}>
                 {sections.find(s => s.id === hoveredSection)?.name}
               </div>
             </div>
@@ -200,8 +200,8 @@ export default function RotatingCarousel({ onSectionClick }: RotatingCarouselPro
             }}
           >
             <div className="bg-white border-2 border-black px-3 py-2">
-              <div className="font-['Arial_Narrow',Arial,sans-serif] font-bold text-xs uppercase whitespace-nowrap">
-                ABOUT
+              <div className="text-[13px] font-semibold whitespace-nowrap" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}>
+                About
               </div>
             </div>
           </div>

@@ -134,14 +134,14 @@ export default function DraggableIcon({ id, label, initialPosition, onClick, onD
         {!isChat && (
           <div
             style={{
-              fontFamily: '"Arial Narrow", Arial, sans-serif',
-              fontSize: '10px',
-              fontWeight: 'bold',
-              textTransform: 'uppercase',
+              fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+              fontSize: '11px',
+              fontWeight: '500',
+              textTransform: 'none',
               textAlign: 'center',
               color: '#000000',
-              lineHeight: 1.2,
-              letterSpacing: '0.05em',
+              lineHeight: 1.4,
+              letterSpacing: '-0.01em',
               maxWidth: '72px',
               wordBreak: 'break-word',
             }}

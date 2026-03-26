@@ -118,16 +118,16 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col relative" style={backgroundStyle}>
       {/* Top header layout - contact info on sides, name in center */}
-      <div className="fixed top-6 left-6 z-[60] text-[11px] leading-relaxed">
-        <div className="font-bold">Creative Director</div>
-        <div className="font-bold">CEO Communications | Meta</div>
-        <div><a href="mailto:hello@brunonakano.com" className="hover:underline font-bold">hello@brunonakano.com</a></div>
+      <div className="fixed top-6 left-6 z-[60] text-[13px] leading-relaxed" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}>
+        <div className="font-medium">Creative Director</div>
+        <div className="font-medium">CEO Communications | Meta</div>
+        <div><a href="mailto:hello@brunonakano.com" className="hover:underline font-medium">hello@brunonakano.com</a></div>
       </div>
       <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[60]">
-        <h1 className="text-[11px] font-bold uppercase">(Bruno Nakano)</h1>
+        <h1 className="text-[13px] font-semibold" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.02em'}}>(Bruno Nakano)</h1>
       </div>
-      <div className="fixed top-6 right-6 z-[60] text-[11px] leading-relaxed text-right">
-        <div className="font-bold">SAO / MAD / SYD / NYC / SF / LA</div>
+      <div className="fixed top-6 right-6 z-[60] text-[13px] leading-relaxed text-right" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}>
+        <div className="font-medium">SAO / MAD / SYD / NYC / SF / LA</div>
         <div>Los Angeles, CA</div>
         <div><ClockDisplay /></div>
       </div>
@@ -152,7 +152,7 @@ export default function Home() {
       {/* SWITCH NAV button - always visible, bottom-right, lower */}
       <button
         onClick={toggleExperience}
-        className="fixed bottom-12 right-6 z-[200] bg-transparent border-0 px-3 py-2 text-[11px] font-bold uppercase gradient-text hover:bg-black hover:text-white transition-all outline-none focus:outline-none"
+        className="fixed bottom-12 right-6 z-[200] bg-transparent border-0 px-3 py-2 text-[13px] font-medium gradient-text hover:bg-black hover:text-white transition-all outline-none focus:outline-none" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}
       >
         SWITCH NAV
       </button>
@@ -162,7 +162,7 @@ export default function Home() {
         <>
           <button
             onClick={() => setShowIndex(true)}
-            className="fixed bottom-12 left-6 z-[200] bg-transparent border-0 px-2 py-1 text-[11px] font-bold uppercase pointer-events-auto cursor-pointer hover:bg-black hover:text-white transition-colors outline-none focus:outline-none"
+            className="fixed bottom-12 left-6 z-[200] bg-transparent border-0 px-2 py-1 text-[13px] font-medium pointer-events-auto cursor-pointer hover:bg-black hover:text-white transition-colors outline-none focus:outline-none" style={{fontFamily:"'Inter','Helvetica Neue',Helvetica,Arial,sans-serif",letterSpacing:'-0.01em'}}
           >
             INDEX
           </button>

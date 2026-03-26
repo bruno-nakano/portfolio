@@ -375,9 +375,8 @@ export default function PhysicsBalls({ onSectionClick }: PhysicsBallsProps) {
         // Draw text with website-consistent typography
         // Invert text color when ball is inverted (white text on black ball)
         context.fillStyle = ball.render.fillStyle === '#ffffff' ? '#000000' : '#FFFFFF';
-        // Match website font: Arial Narrow with 700 weight
-        // Font size 11px to match Mode A folder labels
-        context.font = '700 11px "Arial Narrow", "Helvetica Neue Condensed", "Helvetica Condensed", Impact, sans-serif';
+        // MoMA-style typography: Inter medium
+        context.font = '500 13px "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         // Enable better text rendering

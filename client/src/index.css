@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -67,11 +68,11 @@
   }
 
   body {
-    font-family: 'Arial Narrow', 'Helvetica Neue Condensed', 'Helvetica Condensed', 'Franklin Gothic Demi Cond', 'Impact', sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
-    font-weight: 700 !important;
-    line-height: 1.3;
-    letter-spacing: 0.02em;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     cursor: none !important;
@@ -96,14 +97,17 @@
     @apply cursor-pointer;
   }
 
-  /* Typography matching reference */
-  h1, h2, h3, h4, h5, h6, p, span, div, button {
-    font-weight: 700 !important;
-    letter-spacing: 0.02em;
+  /* MoMA-style typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-transform: none;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    text-transform: uppercase;
+  p, span, div, button {
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   em, i {
@@ -223,15 +227,15 @@
   }
 
   .icon-label {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: -0.01em;
     padding: 0;
     background: transparent;
     white-space: normal;
     text-align: center;
-    line-height: 1.3;
+    line-height: 1.4;
   }
 
   /* Brutalist scrollbar */

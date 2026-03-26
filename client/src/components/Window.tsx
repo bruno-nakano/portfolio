@@ -135,7 +135,7 @@ export default function Window({ id, title, children, isActive, onClose, onClick
         onMouseDown={handleMouseDown}
         onDoubleClick={handleDoubleClick}
       >
-        <span className={title.length <= 2 && title.charCodeAt(0) > 127 ? 'text-[22px] leading-none' : 'text-[11px] font-medium uppercase tracking-wide'} style={{ flex: 1, textAlign: 'center' }}>
+        <span className={title.length <= 2 && title.charCodeAt(0) > 127 ? 'text-[22px] leading-none' : 'text-[13px] font-semibold'} style={{ flex: 1, textAlign: 'center', fontFamily: "'Inter','Helvetica Neue',Helvetica,Arial,sans-serif", letterSpacing: '-0.01em' }}>
           {title}
         </span>
         <div className="window-controls flex gap-3" style={{ position: 'absolute', right: '8px', top: '50%', transform: 'translateY(-50%)' }}>

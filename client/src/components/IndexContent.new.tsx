@@ -463,7 +463,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
             style={{
               position: 'absolute', top: '-32px', right: 0,
               background: 'none', border: 'none', color: '#fff',
-              fontSize: '22px', cursor: 'pointer', fontFamily: 'Arial Narrow, Arial, sans-serif',
+              fontSize: '22px', cursor: 'pointer', fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
             }}
           >✕ CLOSE</button>
         </div>
@@ -478,13 +478,13 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         <div key={section.label} className="mb-10">
           {/* Section header */}
           <h2 style={{
-            fontFamily: 'Arial Narrow, Arial, sans-serif',
+            fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
             fontSize: '13px',
-            fontWeight: 'bold',
+            fontWeight: '600',
             textTransform: 'uppercase',
             marginBottom: '16px',
             color: '#ffffff',
-            letterSpacing: '0.05em',
+            letterSpacing: '-0.01em',
             borderBottom: '1px solid #333',
             paddingBottom: '6px',
           }}>
@@ -501,12 +501,12 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', marginBottom: isExpanded ? '0' : '8px' }}>
                     <div
                       style={{
-                        fontFamily: 'Arial Narrow, Arial, sans-serif',
+                        fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                         fontSize: '11px',
-                        fontWeight: 'bold',
+                        fontWeight: '600',
                         textTransform: 'uppercase',
                         color: '#ffffff',
-                        letterSpacing: '0.05em',
+                        letterSpacing: '-0.01em',
                       }}
                     >
                       {project.title}
@@ -517,11 +517,11 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                         onClick={() => setExpanded(prev => ({ ...prev, [project.id]: !prev[project.id] }))}
                         style={{
                           background: 'none', border: 'none', padding: 0,
-                          fontFamily: 'Arial Narrow, Arial, sans-serif',
+                          fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                           fontSize: '10px',
                           color: '#888',
                           cursor: 'pointer',
-                          letterSpacing: '0.05em',
+                          letterSpacing: '-0.01em',
                           textDecoration: 'underline',
                           textUnderlineOffset: '2px',
                           flexShrink: 0,
@@ -537,10 +537,10 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
-                          fontFamily: 'Arial Narrow, Arial, sans-serif',
+                          fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                           fontSize: '10px',
                           color: '#888',
-                          letterSpacing: '0.05em',
+                          letterSpacing: '-0.01em',
                           textDecoration: 'underline',
                           textUnderlineOffset: '2px',
                         }}
@@ -560,9 +560,9 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                     }}>
                       {project.tagline && (
                         <div style={{
-                          fontFamily: 'Arial Narrow, Arial, sans-serif',
+                          fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                           fontSize: '11px',
-                          fontWeight: 'bold',
+                          fontWeight: '600',
                           textTransform: 'uppercase',
                           color: '#aaa',
                           letterSpacing: '0.08em',
@@ -571,7 +571,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                       )}
                       {project.description && (
                         <div style={{
-                          fontFamily: 'Arial Narrow, Arial, sans-serif',
+                          fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                           fontSize: '12px',
                           color: '#ccc',
                           lineHeight: '1.6',
@@ -581,11 +581,11 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                       )}
                       {project.agency && (
                         <div style={{
-                          fontFamily: 'Arial Narrow, Arial, sans-serif',
+                          fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
                           fontSize: '10px',
                           color: '#666',
                           textTransform: 'uppercase',
-                          letterSpacing: '0.05em',
+                          letterSpacing: '-0.01em',
                         }}>{project.agency}</div>
                       )}
                     </div>
