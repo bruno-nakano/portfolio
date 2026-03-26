@@ -1429,8 +1429,8 @@ export function EventsContent({ activeTags = [], onTagClick, initialExpandedProj
     {
       id: 'meta-connect-2025',
       title: '(01) Meta [Connect 2025]',
-      tagline: "META'S BIGGEST ANNUAL MIXED REALITY & AI EVENT",
-      description: "Meta Connect is the company's biggest and most important event, where Mark Zuckerberg takes the stage to share the latest products, vision, and what's coming next.\n\nOnce again, I led the creative direction for the event, overseeing a full team of creative directors, artists, designers, and partners across product, comms, and marketing. I managed simultaneously multiple workstreams, making sure everything stayed aligned and worked together as one clear, cohesive story. From concept to script to production, my role was to keep the whole thing tight, simple, and engaging while turning complex ideas into something people could actually get.",
+      tagline: "DRIVING END-TO-END CREATIVE FOR META'S FLAGSHIP EVENT",
+      description: "Meta Connect is the company's flagship moment to unveil our vision and latest innovations. I led a team of 30+ creatives and production partners, driving the end-to-end creative for keynote and social.\n\nIn 2025, we created a film that brought Mark's wearable AI vision to life, broke a Guinness World Record with Oakley and Red Bull, and launched the new Meta x Oakley glasses by inviting Diplo and his run club for a live activation. We also partnered with Johnny Cirillo (@watchingnewyork), one of New York's leading street style photographers.\n\nIt became the most successful Meta Connect to date.",
       agency: '',
       production: '',
       tags: ['Events', 'Activation', 'Meta'],
@@ -2222,8 +2222,8 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
         {
           id: 'meta-connect-2025',
           title: 'META [CONNECT 2025]',
-          tagline: "META'S BIGGEST ANNUAL MIXED REALITY & AI EVENT",
-          description: "Meta Connect is the company's biggest and most important event, where Mark Zuckerberg takes the stage to share the latest products, vision, and what's coming next.\n\nOnce again, I led the creative direction for the event, overseeing a full team of creative directors, artists, designers, and partners across product, comms, and marketing. I managed simultaneously multiple workstreams, making sure everything stayed aligned and worked together as one clear, cohesive story. From concept to script to production, my role was to keep the whole thing tight, simple, and engaging while turning complex ideas into something people could actually get.",
+          tagline: "DRIVING END-TO-END CREATIVE FOR META'S FLAGSHIP EVENT",
+          description: "Meta Connect is the company's flagship moment to unveil our vision and latest innovations. I led a team of 30+ creatives and production partners, driving the end-to-end creative for keynote and social.\n\nIn 2025, we created a film that brought Mark's wearable AI vision to life, broke a Guinness World Record with Oakley and Red Bull, and launched the new Meta x Oakley glasses by inviting Diplo and his run club for a live activation. We also partnered with Johnny Cirillo (@watchingnewyork), one of New York's leading street style photographers.\n\nIt became the most successful Meta Connect to date.",
           agency: '',
           hoverImg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663345609769/ebddu5gAjjXLBejJrGs3UU/mc2025-stage_4e7dd518.webp',
           media: [
