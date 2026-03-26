@@ -113,10 +113,10 @@ export default function DraggableIcon({ id, label, initialPosition, onClick, onD
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {isAbout ? (
             /* About: ? emoji */
-            <span style={{ fontSize: '40px', lineHeight: 1, display: 'block' }}>?</span>
+            <span style={{ fontSize: '42px', lineHeight: 1, display: 'block' }}>?</span>
           ) : isChat ? (
             /* Chat: speech bubble emoji */
-            <span style={{ fontSize: '38px', lineHeight: 1, display: 'block' }}>💬</span>
+            <span style={{ fontSize: '40px', lineHeight: 1, display: 'block' }}>💬</span>
           ) : (
             /* Folder: refined outline SVG with rounded corners and tab */
             <svg width="54" height="46" viewBox="0 0 54 46" fill="none" stroke="#000000" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round">
@@ -135,7 +135,7 @@ export default function DraggableIcon({ id, label, initialPosition, onClick, onD
           <div
             style={{
               fontFamily: '"Arial Narrow", Arial, sans-serif',
-              fontSize: '8px',
+              fontSize: '10px',
               fontWeight: 'bold',
               textTransform: 'uppercase',
               textAlign: 'center',

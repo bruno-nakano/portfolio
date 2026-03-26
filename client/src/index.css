@@ -68,7 +68,7 @@
 
   body {
     font-family: 'Arial Narrow', 'Helvetica Neue Condensed', 'Helvetica Condensed', 'Franklin Gothic Demi Cond', 'Impact', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700 !important;
     line-height: 1.3;
     letter-spacing: 0.02em;
@@ -223,7 +223,7 @@
   }
 
   .icon-label {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;

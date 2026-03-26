@@ -463,7 +463,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
             style={{
               position: 'absolute', top: '-32px', right: 0,
               background: 'none', border: 'none', color: '#fff',
-              fontSize: '20px', cursor: 'pointer', fontFamily: 'Arial Narrow, Arial, sans-serif',
+              fontSize: '22px', cursor: 'pointer', fontFamily: 'Arial Narrow, Arial, sans-serif',
             }}
           >✕ CLOSE</button>
         </div>
@@ -479,7 +479,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
           {/* Section header */}
           <h2 style={{
             fontFamily: 'Arial Narrow, Arial, sans-serif',
-            fontSize: '11px',
+            fontSize: '13px',
             fontWeight: 'bold',
             textTransform: 'uppercase',
             marginBottom: '16px',
@@ -502,7 +502,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                     <div
                       style={{
                         fontFamily: 'Arial Narrow, Arial, sans-serif',
-                        fontSize: '9px',
+                        fontSize: '11px',
                         fontWeight: 'bold',
                         textTransform: 'uppercase',
                         color: '#ffffff',
@@ -518,7 +518,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                         style={{
                           background: 'none', border: 'none', padding: 0,
                           fontFamily: 'Arial Narrow, Arial, sans-serif',
-                          fontSize: '8px',
+                          fontSize: '10px',
                           color: '#888',
                           cursor: 'pointer',
                           letterSpacing: '0.05em',
@@ -538,7 +538,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                         rel="noopener noreferrer"
                         style={{
                           fontFamily: 'Arial Narrow, Arial, sans-serif',
-                          fontSize: '8px',
+                          fontSize: '10px',
                           color: '#888',
                           letterSpacing: '0.05em',
                           textDecoration: 'underline',
@@ -561,7 +561,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                       {project.tagline && (
                         <div style={{
                           fontFamily: 'Arial Narrow, Arial, sans-serif',
-                          fontSize: '9px',
+                          fontSize: '11px',
                           fontWeight: 'bold',
                           textTransform: 'uppercase',
                           color: '#aaa',
@@ -572,7 +572,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                       {project.description && (
                         <div style={{
                           fontFamily: 'Arial Narrow, Arial, sans-serif',
-                          fontSize: '10px',
+                          fontSize: '12px',
                           color: '#ccc',
                           lineHeight: '1.6',
                           whiteSpace: 'pre-line',
@@ -582,7 +582,7 @@ export function IndexContent({ onProjectClick }: { onProjectClick?: (sectionId: 
                       {project.agency && (
                         <div style={{
                           fontFamily: 'Arial Narrow, Arial, sans-serif',
-                          fontSize: '8px',
+                          fontSize: '10px',
                           color: '#666',
                           textTransform: 'uppercase',
                           letterSpacing: '0.05em',
