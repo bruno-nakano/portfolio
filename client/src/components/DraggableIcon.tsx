@@ -112,13 +112,8 @@ export default function DraggableIcon({ id, label, initialPosition, onClick, onD
         {/* Icon */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {isAbout ? (
-            /* About: headshot photo */
-            <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663345609769/rgbUlKQdNJALWjcb.png"
-              alt="About Bruno"
-              style={{ width: '54px', height: '54px', objectFit: 'cover', borderRadius: '2px', display: 'block' }}
-              draggable={false}
-            />
+            /* About: ? emoji */
+            <span style={{ fontSize: '40px', lineHeight: 1, display: 'block' }}>?</span>
           ) : isChat ? (
             /* Chat: speech bubble emoji */
             <span style={{ fontSize: '38px', lineHeight: 1, display: 'block' }}>💬</span>
